@@ -1,4 +1,5 @@
-import { InMemoryUserRepository } from "src/lib/user/infrastructure/InMemoryUserRepository";
+
+import { InMemoryUserRepository } from '../../user/infrastructure/InMemoryUserRepository';
 import { UserCreate } from "../../user/application/UserCreate/UserCreate";
 import { UserDelete } from "../../user/application/UserDelete/UserDelete";
 import { UserEdit } from "../../user/application/UserEdit/UserEdit";

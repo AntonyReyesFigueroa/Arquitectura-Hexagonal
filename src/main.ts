@@ -1,22 +1,23 @@
-
 import * as express from 'express';
 import { Request, Response, NextFunction } from 'express';
 import { ExpressUserRouter } from './lib/user/infrastructure/ExpressUserRouter';
 
 const app = express();
 
-app.use(ExpressUserRouter)
+app.use(express.json());
 
-app.use((err: unknown, req: express.Request, res: express.Response, next: express.NextFunction) => {
+app.use(ExpressUserRouter);
+
+app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
     if (err instanceof Error) {
         console.error(err.stack);
-        res.status(500).send(err.message);
+        return res.status(500).json({ message: err.message });
     }
-    console.log(err);
-    res.status(500).send('Something went wrong');
+    console.error(err);
+    return res.status(500).json({ message: "Something went wrong" });
 });
 
 app.listen(3000, () => {
-    console.log('Server is running on http://localhost:3000');
-})
+    console.log("Server is running on http://localhost:3000");
+});
 
